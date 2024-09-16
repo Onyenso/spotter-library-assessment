@@ -40,7 +40,7 @@ class BookViewSet(viewsets.ModelViewSet):
 
 
 class FavoriteViewSet(viewsets.ViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
 
     def list(self, request):
         favorites = Favorite.objects.filter(user=request.user)
