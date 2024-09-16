@@ -32,7 +32,7 @@ This is a Django-based RESTful API that manages books, authors, and user favorit
 3. **Favorites**:
     - `GET /favorites/`: Retrieve a user's favorite books.
     - `POST /favorites/`: Add a book to the favorites list (max 20).
-    - Recommendations are based on user's favorite books.
+    - `GET /recommendations` Get suggested books based on favorites.
 4. **Search**:
   - `GET /books?search=<query>`: Search for books by title or author.
 
