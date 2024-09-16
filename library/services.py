@@ -1,8 +1,5 @@
-from collections import Counter
 import re
 import uuid
-from django.db.models import Q
-from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from django.db.models import Q
 
 from library.models import Book, Favorite
@@ -28,7 +25,7 @@ class LibraryService:
             return False, "An error occurred."
 
     @staticmethod
-    def get_recommended_books(user):
+    def get_recommended_books(user: CustomUser):
         # Step 1: Retrieve favorite books' titles
         favorite_books = Favorite.objects.filter(user=user).values_list('book__title', flat=True)
         if not favorite_books:
@@ -48,10 +45,3 @@ class LibraryService:
         books = Book.objects.exclude(favorited_by__user=user).filter(search_query).distinct()[:5]
 
         return books
-
-    @staticmethod
-    def search_books(query: str):
-        return Book.objects.filter(
-            Q(title__icontains=query) | 
-            Q(author__name__icontains=query)
-        )

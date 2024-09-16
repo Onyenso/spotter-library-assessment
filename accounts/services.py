@@ -1,12 +1,7 @@
 import random
-from typing import Any, List, Mapping, Optional
+from typing import Any, Mapping
 
 from django.contrib.auth import get_user_model
-from django.utils import timezone
-from django.db import transaction
-from django.core.mail import send_mail
-from rest_framework.exceptions import APIException, ValidationError
-from rest_framework.authtoken.models import Token
 
 from accounts.models import CustomUser
 
@@ -16,7 +11,7 @@ User: CustomUser = get_user_model()
 
 class UserService:
     @staticmethod
-    def register_user(validated_data: Mapping[str, Any]) -> object:
+    def register_user(validated_data: Mapping[str, Any]):
         """This method registers a new user."""
 
         new_user: CustomUser = User.objects.create_user(

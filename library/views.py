@@ -68,7 +68,6 @@ class FavoriteViewSet(viewsets.ViewSet):
     
     def destroy(self, request, pk=None):
         try:
-            # Fetch the object with the provided primary key (pk)
             obj = Favorite.objects.get(pk=pk)
         except Favorite.DoesNotExist:
             return Response({"detail": "Not found."}, status=status.HTTP_404_NOT_FOUND)
